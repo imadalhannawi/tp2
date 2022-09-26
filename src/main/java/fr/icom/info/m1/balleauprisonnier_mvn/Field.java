@@ -1,4 +1,4 @@
-package fr.icom.info.m1.balleauprisonnier_mvn;
+package fr.icom.info.m1.balleauprisonnier_fx;
 
 
 import java.util.ArrayList;
@@ -18,7 +18,8 @@ import javafx.scene.paint.Color;
 public class Field extends Canvas {
 	
 	/** Joueurs */
-	Player [] joueurs = new Player[2];
+	Player [] joueurs = new Player[3];
+	Player [] joueurs2 = new Player[3];
 	/** Couleurs possibles */
 	String[] colorMap = new String[] {"blue", "green", "orange", "purple", "yellow"};
 	/** Tableau traçant les evenements */
@@ -48,13 +49,23 @@ public class Field extends Canvas {
         gc = this.getGraphicsContext2D();
         
         /** On initialise le terrain de jeu */
-    	joueurs[0] = new Player(gc, colorMap[0], w/2, h-50, "bottom");
+    	joueurs[0] = new ManualPlayer(gc, colorMap[0], w/4, 20, "top");
     	joueurs[0].display();
 
-    	joueurs[1] = new Player(gc, colorMap[1], w/2, 20, "top");
+    	joueurs[1] = new StaticPlayer(gc, colorMap[0], w/2, 20, "top");
     	joueurs[1].display();
 
+    	joueurs[2] = new StaticPlayer(gc, colorMap[0], w/3, 20, "top");
+    	joueurs[2].display();
+    	
+    	joueurs2[0] = new ManualPlayer(gc, colorMap[1], w/4, h-50, "bottom");
+    	joueurs2[0].display();
 
+    	joueurs2[1] = new StaticPlayer(gc, colorMap[1], w/2, h-50, "bottom");
+    	joueurs2[1].display();
+
+    	joueurs2[2] = new StaticPlayer(gc, colorMap[1], w/3, h-50, "bottom");
+    	joueurs2[2].display();
 	    /** 
 	     * Event Listener du clavier 
 	     * quand une touche est pressee on la rajoute a la liste d'input
@@ -104,7 +115,67 @@ public class Field extends Canvas {
 	            gc.fillRect(0, 0, width, height);
 	        	
 	            // Deplacement et affichage des joueurs
-	        	for (int i = 0; i < joueurs.length; i++) 
+
+	    	    
+	        		if (input.contains("LEFT"))
+	        		{
+	        			joueurs[0].moveLeft();
+	        		} 
+	        		if (input.contains("RIGHT")) 
+	        		{
+	        			joueurs[0].moveRight();	        			
+	        		}
+	        		if (input.contains("UP"))
+	        		{
+	        			joueurs[0].turnLeft();
+	        		} 
+	        		if (input.contains("DOWN")) 
+	        		{
+	        			joueurs[0].turnRight();	        			
+	        		}
+	        		if (input.contains("T")){
+	        			joueurs[0].shoot();
+					}
+	        		joueurs[0].display();
+	        		joueurs[1].display();
+	        		joueurs[2].display();
+	        		
+	        		
+	        		
+	        		
+	        		if (input.contains("A"))
+	        		{
+	        			joueurs2[0].moveLeft();
+	        		} 
+	        		if (input.contains("D")) 
+	        		{
+	        			joueurs2[0].moveRight();	        			
+	        		}
+	        		if (input.contains("W"))
+	        		{
+	        			joueurs2[0].turnLeft();
+	        		} 
+	        		if (input.contains("S")) 
+	        		{
+	        			joueurs2[0].turnRight();	        			
+	        		}
+	        		if (input.contains("Q"))
+	        		{
+	        			joueurs2[0].moveLeft();
+	        		} 
+	        		if (input.contains("Z"))
+	        		{
+	        			joueurs2[0].turnLeft();
+	        		}         		
+	        		if (input.contains("B")){
+	        			joueurs2[0].shoot();
+					}	
+	        		
+	        		joueurs2[0].display();
+	        		joueurs2[1].display();
+	        		joueurs2[2].display();
+	    	    
+	        	/*for (int i = 0; i < joueurs.length; i++) 
 	    	    {
 	        		if (i==0 && input.contains("LEFT"))
 	        		{
@@ -138,13 +209,21 @@ public class Field extends Canvas {
 	        		{
 	        			joueurs[i].turnRight();	        			
 	        		}
-	        		if (input.contains("SPACE")){
+	        		if (i==1 && input.contains("Q"))
+	        		{
+	        			joueurs[i].moveLeft();
+	        		} 
+	        		if (i==1 && input.contains("Z"))
+	        		{
+	        			joueurs[i].turnLeft();
+	        		} 
+	        		if (input.contains("T")){
 	        			joueurs[i].shoot();
-					}
-
+					}	        	
+	        		
 	        		
 	        		joueurs[i].display();
-	    	    }
+	    	    }*/
 	    	}
 	     }.start(); // On lance la boucle de rafraichissement 
 	     
@@ -153,4 +232,9 @@ public class Field extends Canvas {
 	public Player[] getJoueurs() {
 		return joueurs;
 	}
+	
+	public Player[] getJoueurs2() {
+		return joueurs2;
+	}
+	
 }
