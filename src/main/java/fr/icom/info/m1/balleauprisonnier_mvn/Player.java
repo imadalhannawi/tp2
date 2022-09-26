@@ -1,5 +1,7 @@
-package fr.icom.info.m1.balleauprisonnier_mvn;
+package fr.icom.info.m1.balleauprisonnier_fx;
 
+
+import java.util.Random;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Rotate;
@@ -66,11 +68,11 @@ public class Player
         //directionArrow = sprite.getClip().;
 
 	    // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
-        // Random randomGenerator = new Random();
-        // step = randomGenerator.nextFloat();
+         Random randomGenerator = new Random();
+         step = randomGenerator.nextFloat();
 
         // Pour commencer les joueurs ont une vitesse / un pas fixe
-        step = 1;
+        //step = 1;
 	    
 	  }
 
